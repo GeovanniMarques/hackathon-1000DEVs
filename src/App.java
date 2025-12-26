@@ -112,6 +112,23 @@ public class App {
      * Nível de complexidade: 4 de 10
      */
     static char obterCaractereUsuario() {
+        char caractereUsuario;
+        int posicao;
+
+        do {
+            String entrada = teclado.next();
+            caractereUsuario = entrada.charAt(0);
+
+            posicao = CARACTERES_IDENTIFICADORES_ACEITOS.indexOf(caractereUsuario);
+
+            if (posicao != -1) {
+                System.out.println("Verificação validada");
+            } else {
+                System.out.println("Verificação não validada");
+            }
+        } while (posicao == -1);
+
+        return caractereUsuario;
         //TODO 11: Implementar método conforme explicação
 
     }
