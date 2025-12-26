@@ -99,6 +99,14 @@ public class App {
     static void inicializarTabuleiro() {
         //TODO 10: Implementar método conforme explicação
 
+        
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+            tabuleiro[i][j] = ' ';
+        }
+    }
+
+
     }
 
     /*
@@ -162,6 +170,9 @@ public class App {
      */
     static boolean jogadaValida(String posicoesLivres, int linha, int coluna) {
         //TODO 13: Implementar método conforme explicação
+
+        String jogada = "" + linha + coluna;
+        return posicoesLivres.contains(jogada);
     }
 
     /*
