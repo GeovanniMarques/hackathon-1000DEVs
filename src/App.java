@@ -374,6 +374,10 @@ public class App {
     static void atualizaTabuleiro(int[] jogada, char caractereJogador) {
         //TODO 27: Implementar método conforme explicação
 
+        int linha = jogada[0];
+        int coluna = jogada[1];
+        tabuleiro[linha][coluna] = caractereJogador;
+        
     }
 
     /*
