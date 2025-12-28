@@ -342,8 +342,27 @@ public class App {
      * Nível de complexidade: 3 de 10
      */
     static void limparTela() {
-        //TODO 25: Implementar método conforme explicação        
+         try {
+        // Detecta o sistema operacional
+        String sistemaOperacional = System.getProperty("os.name");
+        
+        if (sistemaOperacional.contains("Windows")) {
+            // Comando para Windows
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } else {
+            // Comando para Linux/Mac/Unix
+            new ProcessBuilder("clear").inheritIO().start().waitFor();
+        }
+    } catch (Exception e) {
+        // Se houver erro, imprime várias linhas em branco 
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
     }
+}
+        
+        //TODO 25: Implementar método conforme explicação        
+
 
     /*
      * Descrição: Utilizado para imprimir o tabuleiro o conteúdo do tabuleiro na
