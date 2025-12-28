@@ -1,5 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
+import ia.InteligenciaIA;
+
 
 public class App {
     // Estes caracteres são aceitos como caracteres para representarem
