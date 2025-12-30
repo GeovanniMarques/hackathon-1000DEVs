@@ -303,6 +303,13 @@ public class App {
      */
     static void processarVezUsuario(char caractereUsuario) {
         //TODO 17: Implementar método conforme explicação
+        System.out.println("Vez do usuário jogar!");
+
+        String posicoesLivres = retornarPosicoesLivres();
+        
+        int[] jogada = obterJogadaUsuario(posicoesLivres, teclado);
+        
+        atualizaTabuleiro(jogada, caractereUsuario);
     }
 
     /*
@@ -318,6 +325,13 @@ public class App {
      */
     static void processarVezComputador(char caractereComputador) {
         //TODO 18: Implementar método conforme explicação
+        System.out.println("Vez do computador jogar!");
+
+        String posicoesLivres = retornarPosicoesLivres();
+        
+        int[] jogada = obterJogadaComputador(posicoesLivres, teclado);
+        
+        atualizaTabuleiro(jogada, caractereComputador);
     }
 
     /*
@@ -547,7 +561,8 @@ public class App {
      */
     static boolean teveEmpate() {
         //TODO 31: Implementar método conforme explicação
-
+        String posicoesLivres = retornarPosicoesLivres();
+        return posicoesLivres.isEmpty();
     }
 
     /*
