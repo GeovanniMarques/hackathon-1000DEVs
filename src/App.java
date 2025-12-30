@@ -367,13 +367,61 @@ public class App {
      * Nível de complexidade: 4 de 10 se o tabuleiro for fixo 3x3
      * Nível de complexidade: 8 de 10 se o tabuleiro dinâmico 
      */
-    static boolean teveGanhadorLinha(char caractereJogador) {
-        //TODO 21: Implementar método conforme explicação
+   static boolean teveGanhadorLinha(char caractereJogador) {
+    // Percorre cada linha do tabuleiro (0, 1, 2)
+    for (int linha = 0; linha < TAMANHO_TABULEIRO; linha++) {
+        
+        // Assume que o jogador ganhou esta linha
+        boolean ganhouLinha = true;
+        
+        // Percorre cada coluna desta linha (0, 1, 2)
+        for (int coluna = 0; coluna < TAMANHO_TABULEIRO; coluna++) {
+            
+            // Verifica se a posição é diferente do caractere do jogador
+            if (tabuleiro[linha][coluna] != caractereJogador) {
+                // Se encontrou algo diferente, não ganhou esta linha
+                ganhouLinha = false;
+                break;
+            }
+        }
+        
+        // Se ganhou, ainda é true, o jogador ganhou!
+        if (ganhouLinha) {
+            return true;
+        }
     }
+    
+    // Não ganhou em nenhuma linha
+    return false;
+}
 
     static boolean teveGanhadorColuna(char caractereJogador) {
-        //TODO 22: Implementar método conforme explicação
+    // Percorre cada coluna do tabuleiro (0, 1, 2)
+    for (int coluna = 0; coluna < TAMANHO_TABULEIRO; coluna++) {
+        
+        // Assume que o jogador ganhou esta coluna
+        boolean ganhouColuna = true;
+        
+        // Percorre cada linha desta coluna (0, 1, 2)
+        for (int linha = 0; linha < TAMANHO_TABULEIRO; linha++) {
+            
+            // Verifica se a posição é diferente do caractere do jogador
+            if (tabuleiro[linha][coluna] != caractereJogador) {
+                // Se encontrou algo diferente, não ganhou esta coluna
+                ganhouColuna = false;
+                break;
+            }
+        }
+        
+        // Se ganhouColuna ainda é true, o jogador ganhou!
+        if (ganhouColuna) {
+            return true;
+        }
     }
+    
+    // Não ganhou em nenhuma coluna
+    return false;
+}
 
     static boolean teveGanhadorDiagonalPrincipal( char caractereJogador) {
         //TODO 23: Implementar método conforme explicação
