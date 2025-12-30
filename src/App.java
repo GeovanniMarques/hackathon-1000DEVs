@@ -202,7 +202,49 @@ public class App {
      */
     static int[] obterJogadaUsuario(String posicoesLivres, Scanner teclado) {
         //TODO 14: Implementar método conforme explicação
-    }
+            while (true) {
+                System.out.println("Digite a linha e a coluna (ex: 1 3):");
+
+                String entrada = teclado.nextLine().trim();
+
+                // Verifica se a pessoa digitou dois valores
+                String[] partes = entrada.split(" ");
+                if (partes.length != 2) {
+                    System.out.println("Erro: você deve digitar exatamente dois números separados por espaço.");
+                    continue;
+                }
+
+                int linha, coluna;
+
+                try {
+                    linha = Integer.parseInt(partes[0]);
+                    coluna = Integer.parseInt(partes[1]);
+                } catch (NumberFormatException e) {
+                    System.out.println("Erro: digite apenas números.");
+                    continue;
+                }
+
+                // Ajustar para índice de matriz
+                linha--;
+                coluna--;
+
+                // Validar se está dentro do tabuleiro
+                if (linha < 0 || linha >= TAMANHO_TABULEIRO || coluna < 0 || coluna >= TAMANHO_TABULEIRO) {
+                    System.out.println("Posição fora do tabuleiro. Tente novamente.");
+                    continue;
+                }
+
+                // Validar se é uma jogada permitida
+                if (!jogadaValida(posicoesLivres, linha, coluna)) {
+                    System.out.println("Jogada inválida! Essa posição já está ocupada.");
+                    continue;
+                }
+
+                // Está tudo OK → devolve vetor
+                return new int[]{linha, coluna};
+            }
+        }
+
 
     /*
      * Descrição: Utilizado para obter do computador a linha e a coluna sorteada.
@@ -242,7 +284,13 @@ public class App {
      */
     static int[] converterJogadaStringParaVetorInt(String jogada) {
         //TODO 16: Implementar método conforme explicação
-    }
+            int[] vetor = new int[2];
+
+            vetor[0] = jogada.charAt(0) - '0';  // linha
+            vetor[1] = jogada.charAt(1) - '0';  // coluna
+
+            return vetor;
+        }
 
     /*
      * Descrição: Utilizado para realizar as ações necessárias para processar a vez
@@ -329,11 +377,24 @@ public class App {
 
     static boolean teveGanhadorDiagonalPrincipal( char caractereJogador) {
         //TODO 23: Implementar método conforme explicação
-    }
+            for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+                if (tabuleiro[i][i] != caractereJogador) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
     static boolean teveGanhadorDiagonalSecundaria(char caractereJogador) {
         //TODO 24: Implementar método conforme explicação
-    }
+            for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+                int col = TAMANHO_TABULEIRO - 1 - i; // coluna invertida
+                if (tabuleiro[i][col] != caractereJogador) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
     /*
      * Descrição: Utilizado para limpar a console, para que seja exibido apenas o
@@ -342,8 +403,27 @@ public class App {
      * Nível de complexidade: 3 de 10
      */
     static void limparTela() {
-        //TODO 25: Implementar método conforme explicação        
+         try {
+        // Detecta o sistema operacional
+        String sistemaOperacional = System.getProperty("os.name");
+        
+        if (sistemaOperacional.contains("Windows")) {
+            // Comando para Windows
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } else {
+            // Comando para Linux/Mac/Unix
+            new ProcessBuilder("clear").inheritIO().start().waitFor();
+        }
+    } catch (Exception e) {
+        // Se houver erro, imprime várias linhas em branco 
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
     }
+}
+        
+        //TODO 25: Implementar método conforme explicação        
+
 
     /*
      * Descrição: Utilizado para imprimir o tabuleiro o conteúdo do tabuleiro na
