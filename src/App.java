@@ -594,6 +594,9 @@ public class App {
      * Nível de complexidade: 3 de 10
      */
     static boolean sortearValorBooleano() {
+        Random random = new Random();
+
+        return random.nextBoolean();
         //TODO 32: Implementar método conforme explicação
     }
 
