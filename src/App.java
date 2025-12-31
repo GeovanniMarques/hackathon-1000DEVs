@@ -155,6 +155,25 @@ public class App {
      * Nível de complexidade: 4 de 10
      */
     static char obterCaractereComputador(char caractereUsuario) {
+        char caractereComputador;
+        caractereUsuario = Character.toUpperCase(caractereUsuario);
+        int posicao;
+
+        do{
+            String entrada = teclado.nextLine();
+            caractereComputador = Character.toUpperCase(entrada.charAt(0));
+
+            posicao = CARACTERES_IDENTIFICADORES_ACEITOS.indexOf(caractereComputador);
+
+            if (posicao == -1) {
+                System.out.println("Caractere inválido. Use apenas: " + CARACTERES_IDENTIFICADORES_ACEITOS);
+            } else if (caractereComputador == caractereUsuario) {
+            System.out.println("O computador não pode usar o mesmo caractere do usuário.");
+            posicao = -1;
+            }   
+            } while(posicao == -1);
+
+        return caractereComputador;
         //TODO 12: Implementar método conforme explicação
     }
 
@@ -496,6 +515,7 @@ public class App {
      * Nível de complexidade: 4 de 10
      */
     static void exibirTabuleiro() {
+        
         //TODO 26: Implementar método conforme explicação
         // execute no início deste método a chamada ao método limparTela
         // para garantir que seja exibido o tabuleiro sem nenhum conteúdo antes dele.
