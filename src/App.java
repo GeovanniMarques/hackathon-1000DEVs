@@ -291,6 +291,19 @@ public class App {
      * Nível de complexidade: 6 de 10
      */
     static int[] obterJogadaComputador(String posicoesLivres, Scanner teclado) {
+        String[] vetorPosicoes = posicoesLivres.split(";");
+
+
+        java.util.Random random = new java.util.Random();
+        int indiceSorteado = random.nextInt(vetorPosicoes.length);
+
+
+        String jogadaSorteada = vetorPosicoes[indiceSorteado];
+
+        int linha = jogadaSorteada.charAt(0) - '0';
+        int coluna = jogadaSorteada.charAt(1) - '0';
+
+        return new int[] { linha, coluna };
         //TODO 15: Implementar método conforme explicação
     }
 
@@ -367,10 +380,20 @@ public class App {
      * Nível de complexidade: 5 de 10
      */
     static String retornarPosicoesLivres() {
+        StringBuilder posicoes = new StringBuilder();
+        int tamanho = tabuleiro.length;
+        for (int i = 0; i < tamanho; i++) {
+            for (int j = 0; j < tamanho; j++) {
+                if (tabuleiro [i][j] ==' ') {
+                    posicoes.append(i).append(j).append(";");
+                }
+            }
+        }
+        return posicoes.toString();
         //TODO 19: Implementar método conforme explicação
     }
-
-
+    
+    
     /*
      * Descrição: Utilizado para verificar se o jogador identificado por
      * caractereJogador ganhou o jogo. No jogo da velha um usuário ganha
@@ -388,6 +411,11 @@ public class App {
      * Nível de complexidade: 8 de 10 se o tabuleiro dinâmico 
      */
     static boolean teveGanhador(char caractereJogador) {
+        if (teveGanhadorLinha(caractereJogador)) return true;
+        if (teveGanhadorColuna(caractereJogador)) return true;
+        if (teveGanhadorDiagonalPrincipal(caractereJogador)) return true;
+        if (teveGanhadorDiagonalSecundaria(caractereJogador)) return true;
+        return false;
         //TODO 20: Implementar método conforme explicação
     }
 
