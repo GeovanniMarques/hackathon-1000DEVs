@@ -544,12 +544,36 @@ public class App {
      * 3 linhas e 3 colunas.
      * Nível de complexidade: 4 de 10
      */
-    static void exibirTabuleiro() {
+
+    
+
+    public static void exibirTabuleiro() {
+        char[][] tabuleiro = {
+                {' ', ' ', ' '},
+                {' ', ' ', ' '},
+                {' ', ' ', ' '}
+        };
+
+        System.out.println("\n    1   2   3");
+        for (int i = 0; i < 3; i++) {
+            System.out.print((i + 1) + "   ");
+            System.out.println(tabuleiro[i][0] + " | " + tabuleiro[i][1] + " | " + tabuleiro[i][2]);
+
+            if (i < 2) {
+                System.out.println("   ---+---+---");
+            }
+        }
+        System.out.println();
+    }
+
+
         
         //TODO 26: Implementar método conforme explicação
         // execute no início deste método a chamada ao método limparTela
         // para garantir que seja exibido o tabuleiro sem nenhum conteúdo antes dele.
-    }
+    
+
+    
 
     /*
      * Descrição: Utilizado para atualizar o tabuleiro com o caractere que
@@ -575,9 +599,27 @@ public class App {
      * necessário duas contra barras \\
      * Nível Complexidade: 2 de 10
      */
-    static void exibirVitoriaComputador() {
-        //TODO 28: Implementar método conforme explicação
+
+    public static void exibirVitoriaComputador() {
+        System.out.println("\n=======================================");
+        System.out.println(" O COMPUTADOR VENCEU!");
+        System.out.println(" Ele esta todo feliz!");
+        System.out.println("=======================================\n");
+
+        System.out.println(
+            "         +------------------------+\n" +
+            "         |   (^_^)  VITORIA!      |\n" +
+            "         |   COMPUTADOR GANHOU    |\n" +
+            "         +------------------------+\n" +
+            "                 |        |      \n" +
+            "             +---+--------+----+  \n" +
+            "             |      BASE       | \n" +
+            "             +-----------------+ \n"
+        );
     }
+
+        //TODO 28: Implementar método conforme explicação
+    
 
     /*
      * Descrição: Utilizado para exibir a frase: O usuário venceu!, e uma ARTE ASCII
@@ -586,9 +628,26 @@ public class App {
      * duas contra barras \\
      * Nível Complexidade: 2 de 10
      */
-    static void exibirVitoriaUsuario() {
-        //TODO 29: Implementar método conforme explicação
+
+
+        public static void exibirVitoriaUsuario() {
+        System.out.println("\n=======================================");
+        System.out.println(" VOCE VENCEU! PARABENS!");
+        System.out.println(" O computador ficou triste...");
+        System.out.println("=======================================\n");
+
+        System.out.println(
+            "           \\(^_^)/\n" +
+            "              | |\n" +
+            "             /   \\\n" +
+            "         VOCE GANHOU!\n"
+        );
     }
+
+
+        
+        //TODO 29: Implementar método conforme explicação
+    
 
     /*
      * Descrição: Utilizado para exibir a frase: Ocorreu empate!, e uma ARTE ASCII
@@ -597,9 +656,25 @@ public class App {
      * barras \\
      * Nível Complexidade: 2 de 10
      */
-    static void exibirEmpate() {
-        //TODO 30: Implementar método conforme explicação
+    
+
+        public static void exibirEmpate() {
+        System.out.println("\n=======================================");
+        System.out.println(" DEU VELHA! EMPATE!");
+        System.out.println(" Ninguem venceu dessa vez!");
+        System.out.println("=======================================\n");
+
+        System.out.println(
+            "        +-------+     +-------+\n" +
+            "        |   O   |     |   O   |\n" +
+            "        |   |   |     |   |   |\n" +
+            "        |  / \\  |    |  / \\ |\n" +
+            "        +-------+  X  +-------+\n"
+        );
     }
+
+        //TODO 30: Implementar método conforme explicação
+    
 
     /*
      * Descrição: Utilizado para analisar se ocorreu empate no jogo. Para o primeiro
