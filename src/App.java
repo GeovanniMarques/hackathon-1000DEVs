@@ -32,6 +32,7 @@ public class App {
         do {
             // controla se o jogo terminou
             jogoContinua = true;
+            limparTela();
             exibirTabuleiro();
 
             if (vezUsuarioJogar){
@@ -133,10 +134,13 @@ public class App {
             while (true) {
                 System.out.println("Digite a linha e a coluna (ex: 1 3):");
 
-                String entrada = teclado.nextLine().trim();
+                String entrada = teclado.nextLine();
+                if (entrada == null) continue;
+                entrada = entrada.trim();
+                if (entrada.isEmpty()) continue;
 
-                // Verifica se a pessoa digitou dois valores
-                String[] partes = entrada.split(" ");
+                // Verifica se a pessoa digitou dois valores (aceita múltiplos espaços)
+                String[] partes = entrada.split("\\s+");
                 if (partes.length != 2) {
                     System.out.println("Erro: você deve digitar exatamente dois números separados por espaço.");
                     continue;
@@ -175,12 +179,14 @@ public class App {
 
 
     static int[] obterJogadaComputador(String posicoesLivres, Scanner teclado) {
-        String[] vetorPosicoes = posicoesLivres.split(";");
-
+        // remove eventual ponto-e-vírgula final e divide em posições válidas
+        if (posicoesLivres.endsWith(";")) {
+            posicoesLivres = posicoesLivres.substring(0, posicoesLivres.length() - 1);
+        }
+        String[] vetorPosicoes = posicoesLivres.isEmpty() ? new String[0] : posicoesLivres.split(";");
 
         java.util.Random random = new java.util.Random();
         int indiceSorteado = random.nextInt(vetorPosicoes.length);
-
 
         String jogadaSorteada = vetorPosicoes[indiceSorteado];
 
@@ -188,15 +194,6 @@ public class App {
         int coluna = jogadaSorteada.charAt(1) - '0';
 
         return new int[] { linha, coluna };
-    }
-
-    static int[] converterJogadaStringParaVetorInt(String jogada) {
-        int[] vetor = new int[2];
-
-        vetor[0] = jogada.charAt(0) - '0';  // linha
-        vetor[1] = jogada.charAt(1) - '0';  // coluna
-
-        return vetor;
     }
 
     static void processarVezUsuario(char caractereUsuario) {
@@ -225,7 +222,8 @@ public class App {
         for (int i = 0; i < tamanho; i++) {
             for (int j = 0; j < tamanho; j++) {
                 if (tabuleiro [i][j] ==' ') {
-                    posicoes.append(i).append(j).append(";");
+                    if (posicoes.length() > 0) posicoes.append(";");
+                    posicoes.append(i).append(j);
                 }
             }
         }
@@ -234,11 +232,10 @@ public class App {
     
     
     static boolean teveGanhador(char caractereJogador) {
-        if (teveGanhadorLinha(caractereJogador)) return true;
-        if (teveGanhadorColuna(caractereJogador)) return true;
-        if (teveGanhadorDiagonalPrincipal(caractereJogador)) return true;
-        if (teveGanhadorDiagonalSecundaria(caractereJogador)) return true;
-        return false;
+        return teveGanhadorLinha(caractereJogador) || 
+               teveGanhadorColuna(caractereJogador) || 
+               teveGanhadorDiagonalPrincipal(caractereJogador) || 
+               teveGanhadorDiagonalSecundaria(caractereJogador);
     }
 
    static boolean teveGanhadorLinha(char caractereJogador) {
@@ -334,7 +331,7 @@ public class App {
             // Comando para Linux/Mac/Unix
             new ProcessBuilder("clear").inheritIO().start().waitFor();
         }
-    } catch (Exception e) {
+    } catch (IOException | InterruptedException e) {
         // Se houver erro, imprime várias linhas em branco 
         for (int i = 0; i < 50; i++) {
             System.out.println();
@@ -344,42 +341,13 @@ public class App {
         
     
     static void exibirTabuleiro() {
-<<<<<<< HEAD
-        limparTela();
-        
-        System.out.println("\n  1 2 3");
+        System.out.println("\n    1   2   3");
         for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
-            System.out.print((i + 1) + " ");
-            for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
-                System.out.print(tabuleiro[i][j]);
-                if (j < TAMANHO_TABULEIRO - 1) {
-                    System.out.print("|");
-                }
-            }
-            System.out.println();
-            if (i < TAMANHO_TABULEIRO - 1) {
-                System.out.println("  -+-+-");
-            }
-        }
-        System.out.println();
-    }
-=======
-        char[][] tabuleiro = {
-                {' ', ' ', ' '},
-                {' ', ' ', ' '},
-                {' ', ' ', ' '}
-        
-        
-            };
-
-             System.out.println("\n    1   2   3");
-        for (int i = 0; i < 3; i++) {
             System.out.print((i + 1) + "   "); // números do lado
-        System.out.println(tabuleiro[i][0] + " | " + tabuleiro[i][1] + " | " + tabuleiro[i][2]);
+            System.out.println(tabuleiro[i][0] + " | " + tabuleiro[i][1] + " | " + tabuleiro[i][2]);
 
-        if (i < 2) {
-            System.out.println("   ---+---+---");
-
+            if (i < TAMANHO_TABULEIRO - 1) {
+                System.out.println("   ---+---+---");
             }
         }
         System.out.println();
@@ -391,11 +359,9 @@ public class App {
 
         
         
-        //TODO 26: Implementar método conforme explicação
-        // execute no início deste método a chamada ao método limparTela
-        // para garantir que seja exibido o tabuleiro sem nenhum conteúdo antes dele.
-    
->>>>>>> 46abd0f6d8d8ec9a98d19471add33c225a66459d
+
+    // execute no início deste método a chamada ao método limparTela
+    // para garantir que seja exibido o tabuleiro sem nenhum conteúdo antes dele.
 
     /*
      * Descrição: Utilizado para atualizar o tabuleiro com o caractere que
@@ -416,35 +382,24 @@ public class App {
     }
 
     static void exibirVitoriaComputador() {
-<<<<<<< HEAD
-        System.out.println("\n\nO computador venceu!");
-        System.out.println("   ^__^");
-        System.out.println("   (oo)\\_______");
-        System.out.println("   (__)\\       )\\/\\");
-        System.out.println("       ||----w |");
-        System.out.println("       ||     ||");
-=======
 
         System.out.println("\n=======================================");
     System.out.println(" 💻 O COMPUTADOR VENCEU! 💻");
     System.out.println("   Ele está todo feliz! 😄");
     System.out.println("=======================================\n");
 
-    System.out.println(
-        "        ______________________ \n" +
-        "       |                      |\n" +
-        "       |   (^‿^)  YOU LOSE!   |\n" +
-        "       |______________________|\n" +
-        "          ||            ||     \n" +
-        "          ||   ____     ||     \n" +
-        "          ||  |    |    ||     \n" +
-        "          ||  |____|    ||     \n" +
-        "         (_|____________|_)    \n"
-    );
->>>>>>> 46abd0f6d8d8ec9a98d19471add33c225a66459d
+    System.out.println("""
+        ______________________ 
+       |                      |
+       |   (^‿^)  YOU LOSE!   |
+       |______________________|
+          ||            ||     
+          ||   ____     ||     
+          ||  |    |    ||     
+          ||  |____|    ||     
+         (_|____________|_)    
+        """);
     }
-        //TODO 28: Implementar método conforme explicação
-    
 
     /*
      * Descrição: Utilizado para exibir a frase: O usuário venceu!, e uma ARTE ASCII
@@ -454,31 +409,20 @@ public class App {
      * Nível Complexidade: 2 de 10
      */
     static void exibirVitoriaUsuario() {
-<<<<<<< HEAD
-        System.out.println("\n\nO usuário venceu!");
-        System.out.println("    \\O/");
-        System.out.println("     /|\\");
-        System.out.println("    / \\");
-        System.out.println("  Parabéns!");
-    }
-=======
             
     System.out.println("\n=======================================");
     System.out.println(" 🎉 VOCÊ VENCEU! PARABÉNS! 🎉");
     System.out.println("   O computador ficou triste... 😢");
     System.out.println("=======================================\n");
 
-    System.out.println(
-        "          \\(^_^)/        \n" +
-        "           /| |\\         \n" +
-        "            | |          \n" +
-        "           /   \\         \n" +
-        "        VOCÊ ARRASOU!    \n"
-    );
+    System.out.println("""
+          \\(^_^)/        
+           /| |\\         
+            | |          
+           /   \\         
+        VOCÊ ARRASOU!    
+        """);
 }
-        //TODO 29: Implementar método conforme explicação
-    
->>>>>>> 46abd0f6d8d8ec9a98d19471add33c225a66459d
 
     /*
      * Descrição: Utilizado para exibir a frase: Ocorreu empate!, e uma ARTE ASCII
@@ -488,48 +432,27 @@ public class App {
      * Nível Complexidade: 2 de 10
      */
     static void exibirEmpate() {
-<<<<<<< HEAD
-        System.out.println("\n\nOcorreu empate!");
-        System.out.println("  0 X 0");
-        System.out.println("  -----");
-=======
 
         System.out.println("\n=======================================");
     System.out.println(" 🤝 DEU VELHA! EMPATE! 🤝");
     System.out.println("     Ninguém venceu dessa vez!");
     System.out.println("=======================================\n");
 
-    System.out.println(
-        "       ┌─────────┐   \n" +
-        "       │   0     │   \n" +
-        "       │   │     │   \n" +
-        "       │  / \\    │   \n" +
-        "       │         │   \n" +
-        "       └─────────┘   \n" +
-        "           X         \n" +
-        "       ┌─────────┐   \n" +
-        "       │   0     │   \n" +
-        "       │   │     │   \n" +
-        "       │  / \\    │   \n" +
-        "       │         │   \n" +
-        "       └─────────┘   \n"
-    );
-
-        //TODO 30: Implementar método conforme explicação
->>>>>>> 46abd0f6d8d8ec9a98d19471add33c225a66459d
-    }
-
-    /*
-     * Descrição: Utilizado para analisar se ocorreu empate no jogo. Para o primeiro
-     * nível de deficuldade, basta verificar se todas as posições do tabuleiro não
-     * estão preenchidas com o caractere ' '. Não se preocupe se teve ganhador, não
-     * é responsabilidade deste método esta análise. Sugestão: pense em utilizar a
-     * função retornarPosicoesLivres. Retorne true se teve empate ou false
-     * Nível de complexidade: 3 de 10
-     */
-    static boolean teveEmpate() {
-        String posicoesLivres = retornarPosicoesLivres();
-        return posicoesLivres.isEmpty();
+    System.out.println("""
+        ┌─────────┐   
+        │   0     │   
+        │   │     │   
+        │  / \\    │   
+        │         │   
+        └─────────┘   
+            X         
+        ┌─────────┐   
+        │   0     │   
+        │   │     │   
+        │  / \\    │   
+        │         │   
+        └─────────┘   
+        """);
     }
 
     /*
@@ -546,5 +469,9 @@ public class App {
         return random.nextBoolean();
     }
 
+    static boolean teveEmpate() {
+        String posicoesLivres = retornarPosicoesLivres();
+        return posicoesLivres.isEmpty();
+    }
 
 }
