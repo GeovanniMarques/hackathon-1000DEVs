@@ -545,11 +545,37 @@ public class App {
      * Nível de complexidade: 4 de 10
      */
     static void exibirTabuleiro() {
+        char[][] tabuleiro = {
+                {' ', ' ', ' '},
+                {' ', ' ', ' '},
+                {' ', ' ', ' '}
+        
+        
+            };
+
+             System.out.println("\n    1   2   3");
+        for (int i = 0; i < 3; i++) {
+            System.out.print((i + 1) + "   "); // números do lado
+        System.out.println(tabuleiro[i][0] + " | " + tabuleiro[i][1] + " | " + tabuleiro[i][2]);
+
+        if (i < 2) {
+            System.out.println("   ---+---+---");
+
+            }
+        }
+        System.out.println();
+    }
+
+    
+
+
+
+        
         
         //TODO 26: Implementar método conforme explicação
         // execute no início deste método a chamada ao método limparTela
         // para garantir que seja exibido o tabuleiro sem nenhum conteúdo antes dele.
-    }
+    
 
     /*
      * Descrição: Utilizado para atualizar o tabuleiro com o caractere que
@@ -578,8 +604,26 @@ public class App {
      * Nível Complexidade: 2 de 10
      */
     static void exibirVitoriaComputador() {
-        //TODO 28: Implementar método conforme explicação
+
+        System.out.println("\n=======================================");
+    System.out.println(" 💻 O COMPUTADOR VENCEU! 💻");
+    System.out.println("   Ele está todo feliz! 😄");
+    System.out.println("=======================================\n");
+
+    System.out.println(
+        "        ______________________ \n" +
+        "       |                      |\n" +
+        "       |   (^‿^)  YOU LOSE!   |\n" +
+        "       |______________________|\n" +
+        "          ||            ||     \n" +
+        "          ||   ____     ||     \n" +
+        "          ||  |    |    ||     \n" +
+        "          ||  |____|    ||     \n" +
+        "         (_|____________|_)    \n"
+    );
     }
+        //TODO 28: Implementar método conforme explicação
+    
 
     /*
      * Descrição: Utilizado para exibir a frase: O usuário venceu!, e uma ARTE ASCII
@@ -589,8 +633,22 @@ public class App {
      * Nível Complexidade: 2 de 10
      */
     static void exibirVitoriaUsuario() {
+            
+    System.out.println("\n=======================================");
+    System.out.println(" 🎉 VOCÊ VENCEU! PARABÉNS! 🎉");
+    System.out.println("   O computador ficou triste... 😢");
+    System.out.println("=======================================\n");
+
+    System.out.println(
+        "          \\(^_^)/        \n" +
+        "           /| |\\         \n" +
+        "            | |          \n" +
+        "           /   \\         \n" +
+        "        VOCÊ ARRASOU!    \n"
+    );
+}
         //TODO 29: Implementar método conforme explicação
-    }
+    
 
     /*
      * Descrição: Utilizado para exibir a frase: Ocorreu empate!, e uma ARTE ASCII
@@ -600,6 +658,28 @@ public class App {
      * Nível Complexidade: 2 de 10
      */
     static void exibirEmpate() {
+
+        System.out.println("\n=======================================");
+    System.out.println(" 🤝 DEU VELHA! EMPATE! 🤝");
+    System.out.println("     Ninguém venceu dessa vez!");
+    System.out.println("=======================================\n");
+
+    System.out.println(
+        "       ┌─────────┐   \n" +
+        "       │   0     │   \n" +
+        "       │   │     │   \n" +
+        "       │  / \\    │   \n" +
+        "       │         │   \n" +
+        "       └─────────┘   \n" +
+        "           X         \n" +
+        "       ┌─────────┐   \n" +
+        "       │   0     │   \n" +
+        "       │   │     │   \n" +
+        "       │  / \\    │   \n" +
+        "       │         │   \n" +
+        "       └─────────┘   \n"
+    );
+
         //TODO 30: Implementar método conforme explicação
     }
 
