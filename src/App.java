@@ -40,6 +40,7 @@ public class App {
                 processarVezUsuario(caractereUsuario);
 
                 if (teveGanhador(caractereUsuario)) {
+                    limparTela();
                     exibirTabuleiro();
                     exibirVitoriaUsuario();
                     jogoContinua = false;
@@ -52,6 +53,7 @@ public class App {
                 processarVezComputador(caractereComputador);
                 
                 if (teveGanhador(caractereComputador)) {
+                    limparTela();
                     exibirTabuleiro();
                     exibirVitoriaComputador();
                     jogoContinua = false;
@@ -61,6 +63,7 @@ public class App {
             }
         
             if (jogoContinua && teveEmpate()) {
+                limparTela();
                 exibirTabuleiro();
                 exibirEmpate();
                 jogoContinua = false;
