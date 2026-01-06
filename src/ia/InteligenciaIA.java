@@ -1,5 +1,7 @@
 package ia;
 
+import java.util.Random;
+
 public class InteligenciaIA {
 
     public static String retornarPosicoesLivres(char[][] tabuleiro){
@@ -18,8 +20,7 @@ public class InteligenciaIA {
     public static int[] obterJogadaComputador(String posicoesLivres) {
         String[] vetorPosicoes = posicoesLivres.split(";");
 
-
-        java.util.Random random = new java.util.Random();
+        Random random = new Random();
         int indiceSorteado = random.nextInt(vetorPosicoes.length);
 
 
