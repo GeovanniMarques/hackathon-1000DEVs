@@ -331,7 +331,7 @@ public class App {
             // Comando para Linux/Mac/Unix
             new ProcessBuilder("clear").inheritIO().start().waitFor();
         }
-    } catch (IOException | InterruptedException e) {
+    } catch (Exception e) {
         // Se houver erro, imprime várias linhas em branco 
         for (int i = 0; i < 50; i++) {
             System.out.println();
